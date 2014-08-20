@@ -1,0 +1,151 @@
+/******************************/
+
+#contain{
+	/*
+	-moz-box-shadow: 0 0 3px 3px #BBB;
+	-webkit-box-shadow: 0 0 3px 3px #BBB;
+	 box-shadow: 0 0 3px 3px  #BBB;
+	*/
+}
+
+#contain {
+	/*height:800px;*/
+	
+	padding-right:40px;
+	padding-left:40px;
+	padding-bottom:25px;
+	padding-top:20px;
+	
+	/* background:url(img/paper.gif) ;*/
+
+	
+	
+	/*min-height:600px;*/
+	/*overflow:hidden;*/
+}
+
+body {
+	/*
+	margin-left:60px;
+	margin-right:60px;
+	margin-top:10px;
+	margin-bottom:20px;
+	*/
+	font-family: 'Merienda', cursive;
+	/* font-family: 'Snowburst One', cursive; */
+	font-size:24px;
+	/*background:url(img/bg.jpg);*/
+	 background:url(img/whitey.jpg);
+	
+/*  font-size:17px;*/
+}
+
+#index td {
+	padding-right:19px;
+	padding-left:19px;
+	width:50%;
+	vertical-align:top;
+	}
+
+#nav td a:hover{
+	
+	background-color:#6F6CB3;
+	border:2px solid #3D2966;
+	
+	color:#DEDEDE;
+
+}
+
+#nav td a{
+	
+	background-color:#E6EBE6;
+	display:block;
+	border:2px solid black;
+	/*padding:0.2em 0.6em;*/
+	color:#6F6CB3;
+	text-decoration: none;
+}
+
+
+
+#nav td{
+	width:10%;
+	text-align:center;
+	font-weight:bold;
+}
+#nav {
+	margin-bottom:2px;
+	font-family:stylefont;
+	
+}
+
+
+a {
+	color:#C65400;
+	text-decoration:none;
+}
+a:hover{
+	color:#000000;
+	text-decoration:none;
+}
+
+
+*:link, *:visited, *:hover, *:active, *:focus {
+	-webkit-transition:
+	background-color 0.45s linear ,
+	color 0.45s linear ,
+	text-decoration 0.45s linear;
+
+	-moz-transition:
+	background-color 0.45s linear,
+	color 0.45s linear ,
+	text-decoration 0.45s linear;
+
+	-o-transition:
+	background-color 0.45s linear,
+	color 0.45s linear ,
+	text-decoration 0.45s linear;
+
+	transition:
+	background-color 0.45s linear,
+	color 0.45s linear ,
+	text-decoration 0.45s linear;
+}
+h1,h2,h3,.ishead {
+	
+	color:#999;
+	/*font-family: 'Snowburst One', cursive; */
+	font-family: 'Merienda', cursive;
+	
+	
+	}
+	
+
+ h4, h5, .issubhead {
+	font-family: 'Merienda', cursive;
+	/* font-family: 'Snowburst One', cursive; */
+	color:#554499;
+}
+
+.ishead{
+	font-weight:bold;
+	font-size:1.5em;
+	
+}
+#ishead{
+	
+	background:url(img/bg.jpg);
+}
+.issubhead {
+	font-weight:bold;
+	font-size:1.0em;
+}
+.p{
+	overflow:hidden;
+	padding-bottom:5px;
+	padding-top:5px;
+}
+hr {
+	border-color:#a68c00;
+	background-color:#a68c00;
+}

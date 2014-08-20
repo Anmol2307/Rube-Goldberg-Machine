@@ -1,0 +1,258 @@
+#!/usr/bin/python3
+
+import re
+
+i = open('doc/g25_project_report.tex','r')
+o = open('doc/g25_project_report.html','w')
+
+html = []
+inter = [] 
+
+lines = []
+lines = i.readlines()
+strip_lines = []
+formatted_lines = []
+start = "\\begin{document}"
+end = "\\end{document}"
+accept = 0
+document = []
+
+for  i in lines:
+	strip_lines.append(i.strip());
+	
+for i in strip_lines:
+	if (i == ''):
+		continue;
+	else:
+		formatted_lines.append(i)
+		
+#print(formatted_lines)
+for i in formatted_lines:
+	if i == start:
+		accept = 1
+	if i == end:
+		accept = 0
+	if accept == 1:
+		document.append(i)
+	else:
+		continue
+
+alignment = []
+images  = []
+title = ''		
+names = []
+roll_no = []
+email_id = []
+author = []
+section = []
+intro = []
+analysis = []
+subsections = []		
+		
+#print(document)			
+# Check for title and then the authors
+for i in document:
+	if "\\title" in i:
+		title =i[7:len(i)-2]		
+	if "\\author" in i:
+		for j in range(document.index(i),document.index(i)+11):
+			author.append(document[j])
+			
+		names.append(author[0]) #[8:len(author[0]-5)])
+		names.append(author[4])	#[0:len(author[0]-5)])
+		#names.append(author[8])	#[0:len(author[0]-5)])
+		roll_no.append(author[1])
+		roll_no.append(author[5])
+		#roll_no.append(author[9])
+		email_id.append(author[2])
+		email_id.append(author[6])
+		#email_id.append(author[10])			
+
+	count = 0
+	temp = []							
+	
+	if "\\section{Introduction}" in i:
+		for j in range(document.index(i),len(document)):
+			if document[j] == "\section{Original Design}": 	 
+				break
+			else:
+				intro.append(document[j])
+					
+	if "\\section{Analysis of Plots using matplotlib" in i:
+		for j in range(document.index(i),len(document)):
+			if "\section{Comparing the compiled code}" in document[j]:
+				break
+			else:
+				analysis.append(document[j])
+
+temp = []
+count = 0
+	
+				
+#for i in analysis:
+#	if "\\subsection" in i:
+#		for j in range(analysis.index(i), len(document)):
+#			if "\\subsection" in analysis[j]:
+#				subsections.append(temp)
+#				temp = []
+#				break
+#			else:
+#				temp.append(j)
+#		count=count +1
+													
+for i in analysis:
+	if i[0] == '%':
+		continue
+	elif "\\subsection" in i:
+		subsections.append("Subsection Starts")
+		subsections.append(i[12:len(i)-1])
+	elif "\\includegraphics" in i:
+		images.append(i[30:len(i)-1])
+	elif "\\begin" in i:
+		alignment.append(i[7:len(i)-1])
+	elif "\\end{c" in i:
+		continue
+	else:
+		subsections.append(i)
+
+opening = []		
+for i in intro:
+	if i[0] == '%':
+		continue 								
+	else:
+		opening.append(i)
+
+
+
+temp = subsections[0]
+mod = temp[9:len(temp)-1] 							
+subsections[0] = mod 
+
+
+prog = re.compile('\\&')		
+		
+finopen = []
+for i in opening:
+		j = re.sub('\\\&','&',i)
+		k = re.sub('\\\\\\\\' ,'<br> <br>',j)
+		finopen.append(k)
+		
+finsub = ["Subsection Starts"]
+for i in subsections:
+	j = re.sub('\\\&','&',i) 
+	k = re.sub('\\\\\\\\' ,'<br> <br>',j)
+	finsub.append(k)
+	
+								
+
+temp = finopen[0]
+mod = temp[9:len(temp)-1]
+finopen[0] = mod							
+################## End the processing
+
+temp = names[0]
+mod = temp[8:len(temp)-2]
+names[0] = mod
+temp = names[1]
+mod = temp[0:len(temp)-2]
+names[1] = mod
+#temp = names[2]
+#mod = temp[0:len(temp)-2]
+#names[2] = mod
+
+temp = roll_no[0]
+mod = temp[0:len(temp)-2]
+roll_no[0] = mod
+temp = roll_no[1]
+mod = temp[0:len(temp)-2]
+roll_no[1] = mod
+#temp = roll_no[2]
+#mod = temp[0:len(temp)-2]
+#roll_no[2] = mod
+
+temp = email_id[0]
+mod = temp[8:len(temp)-3]
+email_id[0] = mod
+temp = email_id[1]
+mod = temp[8:len(temp)-3]
+email_id[1] = mod+'n'
+#temp = email_id[2]
+#mod = temp[8:len(temp)-2]
+#email_id[2] = mod
+
+image_list = ['g25_plot01.png' , 'g25_plot02.png' , 'g25_plot03.png' , 'g25_plot04.png' , 'g25_plot05.png', 'g25_plot06.png']
+							
+#print(title)
+#print(author)	
+#print(names)
+#print(roll_no)
+#print(email_id)	
+#print(analysis)
+#print(finopen)
+#print(finsub)
+
+o.write("<html>\n")
+o.write("<head>\n")
+
+o.write('<h1> <center>\n')
+o.write(title + "\n")
+
+o.write('</h1> </center>\n')	
+o.write("</head>\n")
+o.write('<body background="img/whitey.jpg">\n')
+
+for i in range(0,2):
+	print ('<h3> <center>',file=o)
+	print (names[i]+" "+roll_no[i]+" "+email_id[i],file=o)
+	print ('</h3> </center>',file=o)
+
+for i in finopen:
+	if finopen.index(i) == 0:
+		print('<h2> <center>',file=o)
+		print(i,file=o)
+		print('</h2> </center>',file=o)
+	else:
+		print(i,file=o) 
+
+print ("<br> <br> <br>",file=o)
+
+flag = 0
+count = 0
+for i in finsub:
+	if flag == 1:
+		print("<h3> <center>",file=o)
+		print(i,file=o)
+		print("</h3> <center>",file=o)
+		flag = 0
+		if count == 2:
+			print('<left> <img src="../doc/plots-normal/l1.png" align="center" width=40% height=50%></left>',file=o)
+			print('<right> <img src="../doc/plots-high/h1.png" align="center" width=40% height=50%></right> <br>',file=o)
+		if count == 3:
+			print('<left><img src="../doc/plots-normal/l2.png" align="center" width=40% height=50%></left>',file=o)
+			print('<right> <img src="../doc/plots-high/h2.png" align="center" width=40% height=50%></right> <br>',file=o)
+		if count == 4:
+			print('<left><img src="../doc/plots-normal/l3.png" align="center" width=40% height=50%></left>',file=o)
+			print('<right> <img src="../doc/plots-high/h3.png" align="center" width=40% height=50%></right> <br>',file=o)
+		if count == 5:
+			print('<left><img src="../doc/plots-normal/l4.png" align="center" width=40% height=50%></left>',file=o)
+			print('<right> <img src="../doc/plots-high/h4.png" align="center" width=40% height=50%></right> <br>',file=o)
+		if count == 6:
+			print('<left><img src="../doc/plots-normal/l5.png" align="center" width=40% height=50%></left>',file=o)
+			print('<right> <img src="../doc/plots-high/h5.png" align="center" width=40% height=50%></right> <br>',file=o)
+		if count == 7:
+			print('<left><img src="../doc/plots-normal/l6.png" align="center" width=40% height=50%></left>',file=o)
+			print('<right> <img src="../doc/plots-high/h6.png" align="center" width=40% height=50%></right> <br>',file=o)					
+		
+	if (i == "Subsection Starts"):
+		flag =1
+		count=count + 1
+	elif finsub.index(i) >= 1 and finsub[finsub.index(i)-1] != "Subsection Starts":
+		print(i,file=o) 
+
+#print(count)
+
+o.write('</body>\n')
+print('</html>', file=o)
+
+
+		

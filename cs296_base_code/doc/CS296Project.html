@@ -1,0 +1,51 @@
+<head>
+<title>Anmol Garg's Webspace </title>
+<link rel="stylesheet" href="style.css" type="text/css"/>
+<link href='http://fonts.googleapis.com/css?family=Merienda' rel='stylesheet' type='text/css'>
+<!--
+<link href='http://fonts.googleapis.com/css?family=Snowburst+One' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Sacramento' rel='stylesheet' type='text/css'>
+ <script type="text/javascript" src="header.js"> </script>
+<script type="text/javascript"> header() </script>
+-->
+</head>
+<!--
+<img style="zoom: 0.3" src="img/Screenshot from 2013-04-07 02:11:40.png" />
+<img style="zoom: 0.3" src="img/Screenshot from 2013-04-07 02:11:59.png" /> 
+<img style="zoom: 0.3" src="img/Screenshot from 2013-04-07 02:12:32.png" /> 
+<img style="zoom: 0.3" src="img/Screenshot from 2013-04-07 02:12:55.png" /> 
+<img style="zoom: 0.3" src="img/Screenshot from 2013-04-07 02:13:00.png" /> 
+<img style="zoom: 0.3" src="img/Screenshot from 2013-04-07 02:13:03.png" /> 
+<img style="zoom: 0.3" src="img/Screenshot from 2013-04-07 02:13:07.png" /> 
+<img style="zoom: 0.3" src="img/Screenshot from 2013-04-07 02:13:42.png" />
+<img style="zoom: 0.3" src="img/Screenshot from 2013-04-07 02:14:12.png" />
+<img style="zoom: 0.3" src="img/Screenshot from 2013-04-07 02:14:17.png" />
+-->
+<h3 align="center"> Rube Goldberg Machine </h3>
+<img src="img/image1.png" alt="rotating image" align="center" id="rotator">
+<p>
+This is the final simulated version of our <a href= "http://www.cse.iitb.ac.in/~anmolgarg/cs296-lab01-sub.html"> Rube Goldbery Design.</a>  You can have a look at the complete <a href="g25_project_report.pdf">project report</a> or look at some parts of it on the online version<a href="g25_project_report.html"> here.</a>
+</p>
+<script type="text/javascript">
+(function() {
+    var rotator = document.getElementById('rotator');  // change to match image ID
+    var imageDir = 'img/';                          // change to match images folder
+    var delayInSeconds = 0.5;                            // set number of seconds delay
+    // list image names
+    var images = ['Image1.png','Image2.png','Image3.png','Image4.png','Image5.png','Image6.png','Image7.png','Image8.png','Image9.png','Image10.png','Image11.png'
+					,'Image12.png','Image13.png','Image14.png','Image15.png','Image16.png','Image17.png','Image18.png','Image19.png','Image20.png','Image21.png','Image22.png','Image23.png','Image24.png'];
+
+    // don't change below this line
+    var num = 0;
+    var changeImage = function() {
+        var len = images.length;
+        rotator.src = imageDir + images[num++];
+        if (num == len) {
+            num = 0;
+        }
+    };
+    setInterval(changeImage, delayInSeconds * 1000);
+})();
+</script>
+</body>
+
